@@ -4,6 +4,60 @@
 <head>
   <title>Rita Tauk</title>
   <link rel="stylesheet" type="text/css" href="css/style.css" />
+  <script type="text/javascript">
+	function eval(dis){
+		var done = true;
+		var name = document.getElementById('name').value;
+		console.log(name);
+		var validname = /^[a-zA-Z]*$/.test(name);
+		if (!validname){
+			window.alert("Invalid characters in name, letters only.")
+			done = false;
+		}
+		else
+			done = true;
+		var email = document.getElementById('email').value;
+		console.log(email);
+		var validemail = /\S+@\S+\.\S+/.test(email);
+		if (!validemail){
+			window.alert("Invalid Email")
+			done = false;
+		}
+		else
+			done = true;
+		var message = document.getElementById('msg').value;
+		console.log(message);
+		var busi = document.getElementById('bus');
+		if (busi.checked){
+			busi = true;
+			console.log("business");
+		}
+		var num = document.getElementById("num").value;
+		if (num <5 || num >10 || isNaN(num)){
+			window.alert("Invalid Number");
+			done = false;
+		}
+		else
+			done = true;
+		var pers = document.getElementById('per');
+		if (pers.checked){
+			pers = true;
+			console.log("personal");
+		}
+		console.log(done);
+		if(done){
+			document.getElementById("contact").style.visibility = "hidden";
+			var x = document.getElementById("after");
+			console.log(x);
+			x.innerHTML = "<h3>Name: </h3>"+name+"<br><h3>Email: </h3>"+email+"<br><h3>Message: </h3>"+message+"<br> Message is ";
+			if (pers){
+				x.innerHTML = x.innerHTML + "personal";
+			}
+			else
+				x.innerHTML = x.innerHTML + "business";
+		}
+	}
+</script>
 </head>
 
 <body>
@@ -28,13 +82,17 @@
     <div id="site_content">
       <div class="content">
         <h1>Contact Us</h1>
-        <p>This is just a filler form, it doesn't work because the site is static.</p>
-        <form id="contact" action="contact.html" method="post">
+        <p id="after"></p>
+        <form id="contact" >
           <div class="form_settings">
-            <p><span>Name</span><input class="contact" type="text" name="your_name" value="" /></p>
-            <p><span>Email Address</span><input class="contact" type="text" name="your_email" value="" /></p>
-            <p><span>Message</span><textarea class="contact textarea" rows="5" cols="50" name="your_message"></textarea></p>
-            <p style="padding-top: 15px"><span>&nbsp;</span><input class="submit" type="submit" name="contact_submitted" value="send" /></p>
+            <p><span>Name</span><input class="contact" type="text" id="name" value="" /></p>
+            <p><span>Email Address</span><input class="contact" type="email" id="email" value="" /></p>
+            <p><span>Message</span><textarea class="contact textarea" rows="5" cols="50" id="msg"></textarea></p>
+            <p><span>Purpose</span>
+            <input type="radio" name="sex" value="business" id ="bus"checked="true" style="width:0px;">Business &nbsp 
+            <input type="radio" name="sex" value="personal" id="per" style="width:0px;">Personal</p>         
+            <p><span>Enter a number between 5 and 10</span><input type="number" id="num" value="" /></p>
+            <p><input type="button" onclick="eval(this)" value="Submit Message"/></p>
           </div>
         </form>
       </div>
@@ -44,4 +102,5 @@
     </footer>
   </div>
 </body>
+
 </html>
